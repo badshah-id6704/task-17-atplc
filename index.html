@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Exception Handling</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      background: #4a90e2;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #357abd;
+    }
+    .output {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f1f1f1;
+      border-radius: 8px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>JavaScript Exception Handling Examples</h1>
+
+  <div class="container">
+
+    <!-- Example 1 -->
+    <div class="card">
+      <h2>1. Undeclared Variable</h2>
+      <button onclick="handleUndeclared()">Run</button>
+      <div class="output" id="output1"></div>
+    </div>
+
+    <!-- Example 2 -->
+    <div class="card">
+      <h2>2. Divide by Zero</h2>
+      <button onclick="handleDivideByZero()">Run</button>
+      <div class="output" id="output2"></div>
+    </div>
+
+    <!-- Example 3 -->
+    <div class="card">
+      <h2>3. Array Out of Bound</h2>
+      <button onclick="handleOutOfBound()">Run</button>
+      <div class="output" id="output3"></div>
+    </div>
+
+    <!-- Example 4 -->
+    <div class="card">
+      <h2>4. Finally Block</h2>
+      <button onclick="handleFinally()">Run</button>
+      <div class="output" id="output4"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function handleUndeclared() {
+      try {
+        output1.innerHTML = myVar;
+      } catch (err) {
+        output1.innerHTML = "Error: " + err.message;
+      }
+    }
+
+    function handleDivideByZero() {
+      try {
+        let num = 10;
+        let den = 0;
+        if (den === 0) {
+          throw new Error("Divide by Zero Error!");
+        }
+        let result = num / den;
+        output2.innerHTML = "Result: " + result;
+      } catch (err) {
+        output2.innerHTML = "Caught Error: " + err.message;
+      }
+    }
+
+    function handleOutOfBound() {
+      try {
+        let arr = [1, 2, 3];
+        if (arr[5] === undefined) {
+          throw new Error("Array Index Out of Bound Error!");
+        }
+        output3.innerHTML = "Value: " + arr[5];
+      } catch (err) {
+        output3.innerHTML = "Caught Error: " + err.message;
+      }
+    }
+
+    function handleFinally() {
+      let message = "";
+      try {
+        let num = 10;
+        let den = 0;
+        let result = num / den;
+        if (!isFinite(result)) {
+          throw new Error("Cannot divide by zero");
+        }
+        message = "Result is: " + result;
+      } catch (err) {
+        message = "Caught Error: " + err.message;
+      } finally {
+        output4.innerHTML = message + " | Finally block executed.";
+      }
+    }
+  </script>
+
+</body>
+</html>
